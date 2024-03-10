@@ -12,6 +12,7 @@ import SwiftUI
 struct PostCell: View {
     let post: Post
     
+    @State var isCommentSheetVisible = false
     var body: some View {
        VStack {
             HStack { //}(alignment: .top, spacing: 12) {
@@ -51,10 +52,15 @@ struct PostCell: View {
                             Image(systemName: "heart")
                         }
                         Button {
-                            
+                            isCommentSheetVisible = true
                         } label: {
                             Image(systemName: "bubble.right")
                         }
+                        .sheet(isPresented: $isCommentSheetVisible) {
+                            ActivityView()
+                                .presentationDetents([.medium, .fraction(3/4)])
+                        }
+                        
                         Button {
                             
                         } label: {
