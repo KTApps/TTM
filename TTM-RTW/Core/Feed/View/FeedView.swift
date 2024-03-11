@@ -11,7 +11,7 @@ struct FeedView: View {
     @StateObject var viewModel = FeedViewModel()
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             // Navigatable view that allows us to go from feed to different screens. e.g. click profile picture to go to profile
             ScrollView(showsIndicators: false) {
                 LazyVStack {
@@ -24,27 +24,27 @@ struct FeedView: View {
             .refreshable {
                 Task { try await viewModel.fetchPosts() }
             }
-                .navigationTitle("TTM")
-                .navigationBarTitleDisplayMode(.inline)
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                HStack(spacing: 1) {
-                    NavigationLink {
-                        ActivityView()
-                    } label: {
-                        Image(systemName: "heart")
-                            .foregroundColor(.black)
-                            .font(.callout)
-                            .fontWeight(.semibold)
-                    }
-                    
-                    NavigationLink {
-                        AddFriendsView()
-                    } label: {
-                        Image(systemName: "person.fill.badge.plus")
-                            .foregroundColor(.black)
-                            .font(.callout)
+            .navigationTitle("TTM")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    HStack(spacing: 1) {
+                        NavigationLink {
+                            ActivityView()
+                        } label: {
+                            Image(systemName: "heart")
+                                .foregroundColor(.black)
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                        }
+                        
+                        NavigationLink {
+                            AddFriendsView()
+                        } label: {
+                            Image(systemName: "person.fill.badge.plus")
+                                .foregroundColor(.black)
+                                .font(.callout)
+                        }
                     }
                 }
             }
@@ -54,8 +54,6 @@ struct FeedView: View {
 
 struct FeedView_Preciews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
         FeedView()
     }
-}
 }

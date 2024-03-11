@@ -9,8 +9,9 @@ import SwiftUI
 
 struct UserCell: View {
     let user: User
+    @State var AddFriend = false
     
-    // what you see of other users 
+    // what you see of other users
     
     var body: some View {
         HStack {
@@ -26,14 +27,22 @@ struct UserCell: View {
             
             Spacer()
             
-            Text("Add Friend")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .frame(width: 100, height: 32)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color(.systemGray4), lineWidth: 1)
+            HStack {
+                Button(action: {
+                    AddFriend.toggle()
+                    print(AddFriend)
+                }) {
+                    Text(AddFriend ? "Added" : "Add friend")
+                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .fontWeight(.semibold)
+                        .frame(width: 100, height: 32)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color(.systemGray4), lineWidth: 1)
+                        }
                 }
+            }
         }
         .padding(.horizontal)
     }
